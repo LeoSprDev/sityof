@@ -1,43 +1,17 @@
-/* Palette Vert Équilibre (compromis sauge/menthe)
-   Principal: #68B995 | Secondaire: #7BC6A4 | Accent: #4A9B7E
-   Neutres: #F8FAF9, #E8F2ED
-*/
-:root {
-  --primary-color: #68B995;
-  --primary-dark: #4A9B7E;
-  --primary-light: #7BC6A4;
-  --background-white: #F8FAF9;
-  --background-green: #E8F2ED;
+/* Badge informatif dans le hero */
+.hero-badge {
+  display:inline-flex;
+  align-items:center;
+  gap:.5rem;
+  padding:.5rem .8rem;
+  border-radius:999px;
+  background: rgba(104,185,149,.12);
+  color:#2d3748;
+  border:1px solid rgba(104,185,149,.25);
+  backdrop-filter: blur(6px);
+  font-weight:600;
+  font-size:.9rem;
 }
-
-/* Nav glassmorphism */
-.navbar { background: rgba(248,250,249,0.82); backdrop-filter: blur(12px); }
-
-/* Hero revisité */
-.hero { background: radial-gradient(1200px 600px at 10% 10%, rgba(104,185,149,0.12), transparent),
-                     linear-gradient(180deg, #F8FAF9 0%, #E8F2ED 100%); }
-.hero-title { letter-spacing: -0.02em; }
-.hero-subtitle { color: var(--primary-dark); opacity: .9; }
-.btn-primary { background: var(--primary-color); border-color: var(--primary-color); }
-.btn-primary:hover { background: var(--primary-dark); border-color: var(--primary-dark); }
-
-/* Cartes arrondies inspirées du mockup */
-.interet-card, .approche-values, .contact-info, .contact-form-container, .certifications {
-  border-radius: 28px;
-  box-shadow: 0 18px 40px rgba(30, 60, 50, 0.08);
-  border: 1px solid rgba(104,185,149,0.18);
+.hero-badge .dot {
+  width:8px; height:8px; border-radius:50%; background: var(--primary-dark);
 }
-
-/* Badges / chips accentués */
-.value-item, .contact-item:hover { background: rgba(104,185,149,0.10); }
-
-/* Lien actif nav */
-.nav-link.active, .nav-link:hover { color: var(--primary-dark); }
-.nav-link.active::after, .nav-link:hover::after { background: var(--primary-dark); }
-
-/* CTA secondaire discret */
-.btn-secondary { color: var(--primary-dark); border-color: var(--primary-light); }
-.btn-secondary:hover { background: var(--primary-light); color: white; }
-
-/* Accessibilité contrastes */
-*:focus { outline-color: var(--primary-dark); }
