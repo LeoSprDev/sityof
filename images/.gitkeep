@@ -1,0 +1,21 @@
+# Dossier Images
+
+Ce dossier contient les images du site web :
+
+## Images requises :
+- `hero-1.jpg` - Photo du cabinet de consultation (800x600px)
+- `hero-2.jpg` - Espace de thérapie apaisant (800x600px)  
+- `hero-3.jpg` - Salle d'attente accueillante (800x600px)
+- `og-image.jpg` - Image pour Open Graph (1200x630px)
+- `favicon.ico` - Favicon du site (32x32px)
+
+## Recommandations :
+- Format WebP recommandé pour une meilleure performance
+- Compression optimisée (qualité 85%)
+- Images responsives avec attributs alt descriptifs
+- Ambiance chaleureuse et professionnelle
+
+## Couleurs harmonisées :
+- Tons verts apaisants (sage green, vert forêt clair)
+- Couleurs neutres (beiges, blancs cassés)
+- Lumière naturelle privilégiée
