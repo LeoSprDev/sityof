@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Sarah Martin - Psychologue Clinicienne | Thérapie & Accompagnement</title>
+    <title>Dr. Yoff - Psychologue Clinicienne | Thérapie & Accompagnement</title>
     <meta name="description" content="Psychologue clinicienne expérimentée à Petaouchnok. Thérapie individuelle, accompagnement psychologique personnalisé. Prenez rendez-vous pour un suivi bienveillant et professionnel.">
     <meta name="keywords" content="psychologue, thérapeute, thérapie, accompagnement psychologique, Petaouchnok, consultation, bien-être mental">
-    <meta name="author" content="Dr. Sarah Martin">
+    <meta name="author" content="Dr. Yoff">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sityof.github.io/">
-    <meta property="og:title" content="Dr. Sarah Martin - Psychologue Clinicienne">
+    <meta property="og:title" content="Dr. Yoff - Psychologue Clinicienne">
     <meta property="og:description" content="Accompagnement psychologique bienveillant et professionnel. Prenez rendez-vous pour une thérapie personnalisée.">
     <meta property="og:image" content="./images/og-image.jpg">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Dr. Sarah Martin - Psychologue Clinicienne">
+    <meta name="twitter:title" content="Dr. Yoff - Psychologue Clinicienne">
     <meta name="twitter:description" content="Accompagnement psychologique bienveillant et professionnel.">
     
     <!-- Favicon -->
@@ -25,13 +25,20 @@
     
     <!-- Styles -->
     <link rel="stylesheet" href="./css/styles.css">
+    <!-- Google Fonts: Nunito Sans for headings -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Lato for body text -->
+    {# <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet"> #}
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
     
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": ["LocalBusiness", "Psychologist"],
-        "name": "Dr. Sarah Martin - Psychologue Clinicienne",
+        "name": "Dr. Yoff - Psychologue Clinicienne",
         "description": "Psychologue clinicienne expérimentée spécialisée en thérapie individuelle et accompagnement psychologique personnalisé.",
         "image": "./images/og-image.jpg",
         "telephone": "+33123456789",
@@ -58,20 +65,20 @@
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <a href="#hero">Dr. Sarah Martin</a>
+                <a href="#hero">Dr. Yoff</a>
             </div>
-            <div class="nav-menu" id="nav-menu">
+            <div class="nav-menu" id="nav-menu" aria-hidden="true">
                 <a href="#hero" class="nav-link">Accueil</a>
                 <a href="#parcours" class="nav-link">Parcours</a>
                 <a href="#interets" class="nav-link">Centres d'intérêts</a>
                 <a href="#approche" class="nav-link">Approche</a>
                 <a href="#contact" class="nav-link">Contact</a>
             </div>
-            <div class="nav-hamburger" id="nav-hamburger">
+            <button class="nav-hamburger" id="nav-hamburger" type="button" aria-label="Ouvrir le menu" aria-controls="nav-menu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </div>
     </nav>
 
@@ -95,9 +102,10 @@
                     <a href="tel:+33123456789" class="btn-secondary">Appeler</a>
                 </div>
             </div>
-        </section>
-        <!-- Cards Section -->
-        <section id="cards" class="cards-section">
+            </section>
+
+        <!-- Cards Section (separate) -->
+        <section class="cards-section">
             <div class="cards-container">
                 <div class="card">
                     <div class="card-image">
@@ -135,7 +143,7 @@
         <!-- Parcours Section -->
         <section id="parcours" class="parcours section-light">
             <div class="container">
-                <h2 class="section-title">Mon Parcours Professionnel</h2>
+                <h2 class="section-title">Mon parcours professionnel</h2>
                 <div class="parcours-content">
                     <div class="parcours-timeline">
                         <div class="timeline-item">
@@ -176,7 +184,7 @@
         <!-- Centres d'intérêts Section -->
         <section id="interets" class="interets">
             <div class="container">
-                <h2 class="section-title">Ce qui m'Anime</h2>
+                <h2 class="section-title">Ce qui m'anime</h2>
                 <div class="interets-grid">
                     <div class="interet-card">
                         <div class="card-icon">🌱</div>
@@ -301,18 +309,18 @@
                     
                     <div class="contact-form-container">
                         <h3>Envoyer un Message</h3>
-                        <form id="contact-form" class="contact-form" action="./php/contact.php" method="POST">
+                        <form id="contact-form" class="contact-form" action="" method="POST" data-endpoint="https://formspree.io/f/REPLACE_WITH_YOUR_ID">
                             <div class="form-group">
                                 <label for="name">Nom complet *</label>
-                                <input type="text" id="name" name="name" required>
+                                <input type="text" id="name" name="name" required autocomplete="name">
                             </div>
                             <div class="form-group">
                                 <label for="email">Email *</label>
-                                <input type="email" id="email" name="email" required>
+                                <input type="email" id="email" name="email" required autocomplete="email">
                             </div>
                             <div class="form-group">
                                 <label for="phone">Téléphone</label>
-                                <input type="tel" id="phone" name="phone">
+                                <input type="tel" id="phone" name="phone" autocomplete="tel">
                             </div>
                             <div class="form-group">
                                 <label for="subject">Sujet *</label>
@@ -327,6 +335,10 @@
                             <div class="form-group">
                                 <label for="message">Message *</label>
                                 <textarea id="message" name="message" rows="5" placeholder="Décrivez brièvement votre demande..." required></textarea>
+                            </div>
+                            <div class="form-group" style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;" aria-hidden="true">
+                                <label for="website">Ne pas remplir ce champ</label>
+                                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
                             </div>
                             <div class="form-group form-checkbox">
                                 <input type="checkbox" id="consent" name="consent" required>
@@ -349,7 +361,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-info">
-                    <p>&copy; 2025 Dr. Sarah Martin - Psychologue Clinicienne. Tous droits réservés.</p>
+                    <p>&copy; 2025 Dr. Yoff - Psychologue Clinicienne. Tous droits réservés.</p>
                     <p>N° ADELI : 759012345 | Membre de la Fédération Française des Psychologues</p>
                 </div>
                 <div class="footer-legal">

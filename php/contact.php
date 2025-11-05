@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 // Configuration email - À PERSONNALISER
 $config = [
     'to_email' => 'contact@sarahmartin-psy.fr',
-    'to_name' => 'Dr. Sarah Martin',
+    'to_name' => 'Dr. Yoff',
     'from_email' => 'noreply@sarahmartin-psy.fr',
     'from_name' => 'Site Web - Contact',
     'smtp_host' => 'smtp.example.com', // À configurer selon votre hébergeur
@@ -209,7 +209,7 @@ function createEmailContent($data) {
     <body>
         <div class="header">
             <h2>Nouveau message de contact</h2>
-            <p>Site Web - Dr. Sarah Martin</p>
+            <p>Site Web - Dr. Yoff</p>
         </div>
         <div class="content">
             <div class="field">

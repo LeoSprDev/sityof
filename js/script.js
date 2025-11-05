@@ -25,8 +25,12 @@
         setupContactForm();
         setupParallaxEffects();
         addAccessibilityFeatures();
+        adjustCardsOverlap();
         
-        window.addEventListener('resize', debounce(handleResize, 100));
+        window.addEventListener('resize', debounce(() => {
+            handleResize();
+            adjustCardsOverlap();
+        }, 100));
         console.log('Site psychologue initialisé avec succès');
     }
 
@@ -57,6 +61,11 @@
 
         if (navHamburger) {
             navHamburger.addEventListener('click', toggleMobileMenu);
+            navHamburger.setAttribute('aria-expanded', 'false');
+        }
+
+        if (navMenu) {
+            navMenu.setAttribute('aria-hidden', 'true');
         }
 
         document.querySelectorAll('.nav-link').forEach(link => {
@@ -109,8 +118,12 @@
         navMenu.classList.toggle('active');
         navHamburger.classList.toggle('active');
         
-        navMenu.setAttribute('aria-expanded', !isActive);
-        navHamburger.setAttribute('aria-expanded', !isActive);
+        if (navMenu) {
+            navMenu.setAttribute('aria-hidden', isActive ? 'true' : 'false');
+        }
+        if (navHamburger) {
+            navHamburger.setAttribute('aria-expanded', isActive ? 'false' : 'true');
+        }
         
         document.body.style.overflow = !isActive ? 'hidden' : '';
     }
@@ -121,8 +134,12 @@
     function closeMobileMenu() {
         navMenu.classList.remove('active');
         navHamburger.classList.remove('active');
-        navMenu.setAttribute('aria-expanded', 'false');
-        navHamburger.setAttribute('aria-expanded', 'false');
+        if (navMenu) {
+            navMenu.setAttribute('aria-hidden', 'true');
+        }
+        if (navHamburger) {
+            navHamburger.setAttribute('aria-expanded', 'false');
+        }
         document.body.style.overflow = '';
     }
 
@@ -274,6 +291,11 @@
         
         const submitBtn = contactForm.querySelector('.btn-submit');
         const formData = new FormData(contactForm);
+        const endpoint = contactForm.dataset.endpoint || contactForm.getAttribute('action') || '';
+        const honeypot = contactForm.querySelector('input[name="website"]');
+        if (honeypot && honeypot.value.trim()) {
+            return; // bot detected
+        }
         
         if (!validateForm()) {
             showFormMessage('Veuillez corriger les erreurs dans le formulaire.', 'error');
@@ -284,18 +306,24 @@
         submitBtn.disabled = true;
 
         try {
-            const response = await fetch('./php/contact.php', {
+            const response = await fetch(endpoint, {
                 method: 'POST',
-                body: formData
+                body: formData,
+                headers: endpoint.includes('formspree.io') ? { 'Accept': 'application/json' } : undefined
             });
 
-            const result = await response.json();
-
-            if (result.success) {
+            if (response.ok) {
                 showFormMessage('Votre message a été envoyé avec succès ! Je vous recontacterai dans les plus brefs délais.', 'success');
                 contactForm.reset();
             } else {
-                showFormMessage(result.message || 'Une erreur est survenue lors de l\'envoi.', 'error');
+                let errorText = 'Une erreur est survenue lors de l\'envoi.';
+                try {
+                    const data = await response.json();
+                    if (data && data.errors && data.errors.length) {
+                        errorText = data.errors.map(e => e.message).join(' ');
+                    }
+                } catch (_) { /* noop */ }
+                showFormMessage(errorText, 'error');
             }
         } catch (error) {
             console.error('Erreur lors de l\'envoi:', error);
@@ -460,6 +488,35 @@
             requestAnimationFrame(() => {
                 window.dispatchEvent(new Event('scroll'));
             });
+        }
+    }
+
+    /**
+     * Ajuste dynamiquement le chevauchement des cards pour ne pas recouvrir le hero-content
+     */
+    function adjustCardsOverlap() {
+        try {
+            if (window.innerWidth < 768) return; // desktop only
+            const root = document.documentElement;
+            const heroContent = document.querySelector('.hero-content');
+            if (!heroContent) return;
+
+            const rect = heroContent.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+            const safeGap = 32; // espace entre hero-content et cards
+
+            // Espace réel sous le hero-content
+            const spaceBelow = viewportHeight - rect.bottom - safeGap;
+            const allowedOverlap = Math.max(0, spaceBelow);
+
+            // Overlap voulu par défaut (effet visuel), plafonné par ce qui est permis
+            const baseDesired = 280; // px, ajustable si besoin
+            const maxOverlap = 360; // pour garder un rendu propre
+            const finalOverlap = Math.min(baseDesired, allowedOverlap, maxOverlap);
+
+            root.style.setProperty('--cards-overlap', finalOverlap + 'px');
+        } catch (e) {
+            // garder la valeur CSS par défaut en cas d'erreur
         }
     }
 

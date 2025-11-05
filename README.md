@@ -1,4 +1,4 @@
-# Site Vitrine Psychologue - Dr. Sarah Martin
+# Site Vitrine Psychologue - Dr. Yoff
 
 > Site web one-page élégant et professionnel pour un psychologue/thérapeute, conçu avec HTML/CSS/JavaScript vanilla et optimisé pour le référencement.
 

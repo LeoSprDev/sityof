@@ -11,6 +11,7 @@
 html {
     scroll-behavior: smooth;
     font-size: 16px;
+    scroll-padding-top: 86px;
 }
 
 /* Respect user motion preferences */
@@ -29,11 +30,19 @@ html {
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
     color: #2d3748;
     background-color: #F8FAF9;
     overflow-x: hidden;
+}
+
+/* Headings use Albert Sans */
+/* Headings use Nunito Sans */
+h1, h2, h3, h4, h5, h6,
+.section-title,
+.hero-title {
+    font-family: 'Dancing Script', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
 /* Focus styles for accessibility */
@@ -111,6 +120,10 @@ body {
     --breakpoint-md: 768px;
     --breakpoint-lg: 1024px;
     --breakpoint-xl: 1280px;
+    
+    /* Layout vars */
+    --cards-overlap: clamp(240px, 32vh, 360px); /* amount of cards overlapping the hero, responsive to viewport height */
+    --navbar-height: 70px;
 }
 
 /* ===========================
@@ -185,6 +198,10 @@ body {
     transition: var(--transition-fast);
 }
 
+/* Remove focus outline frame on logo link */
+.nav-logo a:focus { outline: none; }
+.nav-logo a:focus-visible { outline: none; }
+
 .nav-logo a:hover {
     color: var(--primary-dark);
 }
@@ -201,6 +218,11 @@ body {
     position: relative;
     transition: var(--transition-fast);
 }
+
+/* Remove default focus outline on nav links but keep underline as focus cue */
+.nav-link:focus { outline: none; }
+.nav-link:focus-visible { outline: none; }
+.nav-link:focus-visible::after { width: 100%; }
 
 .nav-link:hover,
 .nav-link.active {
@@ -282,16 +304,16 @@ body {
    =========================== */
 
 .hero {
-    padding: var(--spacing-2xl) 0;
-    background: url('../images/hero.jpg') center/cover no-repeat,
-                radial-gradient(1200px 600px at 10% 10%, rgba(104, 185, 149, 0.12), transparent),
-                linear-gradient(180deg, rgba(248, 250, 249, 0.9) 0%, rgba(232, 242, 237, 0.9) 100%);
+    padding: 0;
+    background: url('../images/hero.jpg') center/cover no-repeat;
     position: relative;
-    overflow: hidden;
-    min-height: 60vh;
+    overflow: visible;
+    min-height: 100vh;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    padding-top: calc(var(--navbar-height) + clamp(16px, 6vh, 120px));
 }
 
 .hero::before {
@@ -308,7 +330,7 @@ body {
 .hero-content {
     text-align: center;
     width: 100%;
-    max-width: 1200px;
+    max-width: 800px;
     margin: 0 auto;
     padding: 50px 2rem;
     background: rgba(248, 250, 249, 0.85);
@@ -455,13 +477,13 @@ body {
 
 @media (min-width: 768px) {
     .hero {
-        background: url('../images/hero.jpg') center/cover no-repeat,
-                    linear-gradient(180deg, rgba(248, 250, 249, 0.85) 0%, rgba(232, 242, 237, 0.85) 100%);
+        background: url('../images/hero.jpg') center/cover no-repeat;
     }
     
     .hero-content {
         max-width: 900px;
         padding: 40px 2rem;
+        margin-bottom: 30px;
     }
     
     .hero-title {
@@ -492,15 +514,17 @@ body {
     }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
     .hero {
-        background: url('../images/hero.jpg') center/cover no-repeat,
-                    linear-gradient(180deg, rgba(248, 250, 249, 0.9) 0%, rgba(232, 242, 237, 0.9) 100%);
+        background: url('../images/hero.jpg') center/cover no-repeat;
+        padding-bottom: 0; /* overlap handled by cards-section negative margin */
     }
     
     .hero-content {
         max-width: 1000px;
         padding: 50px 3rem;
+        margin-bottom: 40px;
+        z-index: 2; /* ensure stays above cards */
     }
 }
 
@@ -1268,7 +1292,10 @@ section {
 
 .cards-section {
     padding: var(--spacing-2xl) 0;
-    background: var(--background-white);
+    background: transparent;
+    position: relative;
+    margin-top: calc(var(--cards-overlap) * -1);
+    z-index: 1;
 }
 
 .cards-container {
